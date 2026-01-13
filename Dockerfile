@@ -1,4 +1,4 @@
-FROM quay.io/frrouting/frr:10.5.0
+FROM quay.io/frrouting/frr:10.5.1
 
 COPY hostbgp-config.sh /usr/local/bin/hostbgp-config.sh
 RUN chmod +x /usr/local/bin/hostbgp-config.sh
