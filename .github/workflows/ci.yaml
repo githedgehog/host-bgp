@@ -39,6 +39,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish images
-        run: |
-          just --timestamp oci_repo=ghcr.io push
+      - name: Publish latest image (on master)
+        if: github.ref == 'refs/heads/master'
+        run: just --timestamp oci_repo=ghcr.io push-latest
+
+      - name: Publish versioned image (on tag)
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: just --timestamp oci_repo=ghcr.io push-versioned
